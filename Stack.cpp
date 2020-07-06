@@ -67,7 +67,6 @@ public:
     else {
       Node* n = head -> next;
       int d = head-> data;
-      delete(head);
       head = n;
       return d;
     }
@@ -91,4 +90,40 @@ public:
     }
   }
   
+};
+
+class linkedStack {
+public:
+    int n;
+    SLinkedList* S;
+    
+    linkedStack() {
+        this->S = new SLinkedList();
+        this->n = 0;
+    }
+    int size() {
+        return n;
+    }
+    bool empty() {
+        if(n == 0)
+           return 1;
+        return 0;
+    }
+    int top() {
+        if(empty()){
+            return -1;
+        }else {
+            return S->front();
+        }
+    }
+    void push(int e) {
+        S->addBack(e);
+    }
+    int pop() {
+        if(empty()){
+            return -1;
+        }else {
+            return S->removeFront();
+        }
+    }
 };

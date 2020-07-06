@@ -67,7 +67,6 @@ public:
     else {
       Node* n = head -> next;
       int d = head-> data;
-      delete(head);
       head = n;
       return d;
     }
@@ -92,3 +91,63 @@ public:
   }
   
 };
+
+class linkedStack {
+public:
+    int n;
+    SLinkedList* S;
+    
+    linkedStack() {
+        this->S = new SLinkedList();
+        this->n = 0;
+    }
+    int size() {
+        return n;
+    }
+    bool empty() {
+        if(n == 0)
+           return 1;
+        return 0;
+    }
+    int top() {
+        if(empty()){
+            return -1;
+        }else {
+            return S->front();
+        }
+    }
+    void push(int e) {
+        S->addFront(e);
+        n++;
+    }
+    int pop() {
+        if(empty()){
+            return -1;
+        }else {
+            n--;
+            return S->removeFront();
+        }
+    }
+};
+
+int main() {
+int N, X;
+string s;
+linkedStack ls;
+cin >> N;
+while(N--) {
+    cin >> s;
+    if(s == "empty") {
+        cout << ls.empty()  << "\n";
+    } else if (s == "top") {
+         cout << ls.top() << "\n";
+    } else if (s == "push") {
+        cin >> X;
+        ls.push(X);
+    } else if (s == "pop") {
+        cout << ls.pop() << "\n";
+    } else if (s == "size") {
+        cout << ls.size() << "\n";
+    }
+  }
+}

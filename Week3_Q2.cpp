@@ -92,3 +92,28 @@ public:
   }
   
 };
+
+int main() {
+    int N,X;
+    string s;
+    SLinkedList sll;
+    cin >> N;
+    while(N--) {
+        cin >> s;
+        if(s == "empty") {
+            cout << sll.empty() << "\n";
+        } else if(s == "front") {
+            cout << sll.front() << "\n";
+        } else if (s == "removeFront") {
+            cout << sll.removeFront() << "\n";
+        } else if (s == "addFront") {
+            cin >> X;
+            sll.addFront(X);
+        } else if (s == "addBack") {
+            cin >> X;
+            sll.addBack(X);
+        } else if (s == "showList"){
+            sll.showList();
+        }
+    }
+}
