@@ -2,93 +2,96 @@
 #include <string>
 using namespace std;
 
+typedef int Elem;
+
 class Node{
-public:
-  int data;
+private:
+  Elem elem;
   Node* next;
-  
-  Node(int e){
-    this->data = e;
-    this->next = NULL;
-  }
+
+  friend class SLinkedList;
 };
 
 class SLinkedList{
-public:
+private:
   Node* head;
   Node* tail;
 
-  SLinkedList() {
-    head = NULL;
+public:
+  SLinkedList();
+  ~SLinkedList();
+  bool empty() const;
+  Elem front() const;
+  void addFront(const Elem& e);
+  void removeFront();
+  void addBack(const Elem& e);
+  void removeBack();
+};
+
+bool SLinkedList::empty() const{
+  if(head == NULL){
+    return 1;
+  }else {
+    return 0;
+  }
+}
+
+Elem SLinkedList::front() const{
+  if(empty()) {
+    return -1;
+  }else {
+    
+  }
+}
+
+void SLinkedList::addFront(const Elem& e) {
+  Node* v = new Node;
+  if(empty()) {
+    tail = v;
+  }
+  v->elem = e;
+  v->next = head;
+  head = v;
+}
+
+void SLinkedList::removeFront() {
+  if(empty()){
+    return;
+  }
+  Node* old = head;
+  head = old->next;
+  delete old;
+  if(empty()) {
     tail = NULL;
   }
+}
 
-  void addFront(int x) {
-    Node* newnode = new Node(x);
-    if(empty()) {
-      tail = newnode;
-      head = newnode;
-    }
-    else {
-      newnode -> next = head;
-      head = newnode;
-    }
+void SLinkedList::addBack(const Elem& e) {
+  Node* v = new Node;
+  v -> elem = e;
+  v -> next = NULL;
+  if(empty()) {
+    head = tail = v;
   }
+  else {
+    tail -> next = v;
+    tail = v;
+  }
+}
 
-  void addBack(int x) {
-    Node* newnode = new Node(x);
-    if(empty()) {
-      tail = newnode;
-      head = newnode;
-    }
-    else {
-      tail -> next = newnode;
-      tail = newnode;
-    }
+void SLinkedList::removeBack() {
+  if(empty()) return;
+  Node* current = head;
+  if(current == tail) {
+    head = tail = NULL;
+    delete current;
   }
-
-  void showList() {
-    if(empty()) {
-        cout << -1 << "\n";
-    } else {
-        Node* cur = head;
-        while(cur != NULL) {
-            cout << cur->data << " ";
-            cur = cur->next;
-        }
-        cout << "\n";
+  else {
+    while(current -> next != tail) {
+      current = current -> next;
     }
+    tail = current;
+    delete tail -> next;
+    tail -> next = NULL;
   }
-
-  int removeFront() {
-    if(empty()) {
-      return -1;
-    }
-    else {
-      Node* n = head -> next;
-      int d = head-> data;
-      delete(head);
-      head = n;
-      return d;
-    }
-  }
-
-  int front() {
-    if(empty()) {
-      return -1;
-    }
-    else {
-      return head->data;
-    }
-  }
-
-  int empty() {
-    if(head==NULL){
-      return 1;
-    }
-    else{
-      return 0;
-    }
-  }
-  
-};
+}
