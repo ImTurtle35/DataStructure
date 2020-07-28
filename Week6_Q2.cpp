@@ -28,7 +28,6 @@ public:
 LinkedList::LinkedList(){
     f = NULL; r = NULL;
 }
-
 int LinkedList::front(){
     return f->data;
 }

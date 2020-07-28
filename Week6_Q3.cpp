@@ -23,8 +23,6 @@ public:
     void addEnd(int data);
     void removeFront();
 };
-
-
 LinkedList::LinkedList(){
     f = NULL; r = NULL;
 }
